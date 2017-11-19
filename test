@@ -1,0 +1,39 @@
+create database test;
+use test;
+create table tb_customer (
+	id_customer int, 
+	nm_customer varchar,
+	cpf_cnpj numeric,
+	primary key(id_customer)
+);
+create table dm_addres_type (
+	cd_adress_type char(1),
+	ds_adress_type varchar,
+	primary key(cd_adress_type)
+);
+create table tb_customer_adress (
+	street varchar,
+	lot int,
+	references varchar,
+	zip_cod varchar
+);
+alter table tb_customer_adress add foreign key (id_customer)
+	references tb_customer(id_customer)
+	on delete restrict
+	on update restrict;
+alter table tb_customer_adress add foreign key (cd_adress_type)
+	references dm_address_type(cd_address_type)
+	on delete restrict
+	on update restrict;
+  
+  
+  
+  
+  1- primary keys: d_customer , cd_address_type
+  2- inserts:
+ INSERT INTO TB_CUSTOMER (NM_CUSTOMER, CPF_CNPJ) VALUES (JOÃOZINHO SILVA, 888.777.666-55);
+INSERT INTO CD_ADRESS_TYPE (R) VALUES (Rua das Flores, 1, null, 01234-567);
+INSERT INTO CD_ADRESS_TYPE (C) VALUES (Rua das Pedras, 100, CONJUNTO 200, 01234-567);
+  3- how many types of addresses can I insert per client: 3
+  4- steps to delete some client (w/ cpf): delete from TB_CUSTOMER WHERE CPF_CNPJ = /*cpf*/;
+  
